@@ -19,7 +19,7 @@ public class App {
 		boolean sair = false;
 
 		while (!sair) {
-			System.out.println("=| Menu |=");
+			System.out.println("==| Menu |==");
 			System.out.println("1. Criar");
 			System.out.println("2. Pesquisar");
 			System.out.println("3. Deletar");
