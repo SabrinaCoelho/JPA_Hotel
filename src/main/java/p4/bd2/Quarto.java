@@ -30,7 +30,8 @@ public class Quarto {
 	public Quarto(int numero, int andar, String predio, float preco, String cama, String tipo,
 			Integer capacidade, boolean disponibilidade) {
 		super();
-		this.numero = numero;
+		numero = verificacaoNumQuarto(numero);
+		this.numero = Integer.parseInt(predio + Integer.toString(andar) + Integer.toString(numero));
 		this.andar = andar;
 		this.predio = predio;
 		this.preco = preco;
@@ -38,6 +39,13 @@ public class Quarto {
 		this.tipo = tipo;
 		this.capacidade = capacidade;
 		this.disponibilidade = disponibilidade;
+	}
+	public static int verificacaoNumQuarto(int numero){
+		String numAux = Integer.toString(numero);
+		if(numAux.length() > 0 && numAux.length() == 3) {
+			return Integer.parseInt(numAux.substring(2));
+		}
+		return numero;
 	}
 
 	public Integer getNumero() {

@@ -172,10 +172,28 @@ public class App {
 				switch (pesquisarOpcao) {
 					case 1:
 						// Lógica para pesquisar um quarto
+						/*
+						System.out.println("Número do prédio:");
+						String numPredio = scanner.next();
+						System.out.println("Número do andar:");
+						String numAndar = scanner.next();
+						System.out.println("Número do quarto:");
+						int numQuarto = scanner.nextInt();
+						scanner.nextLine();
+						numQuarto = Quarto.verificacaoNumQuarto(numQuarto);
+						String numQuartoStr = Integer.toString(numQuarto);
+						String aux = numPredio + numAndar + numQuarto;
+						*/
+						int idQuarto = verificaNumQuarto(scanner);
+						Quarto quarto = em.find(Quarto.class, idQuarto);
+						
+						/**/
+						/*
 						System.out.println("Número do quarto:");
 				        int numQuarto = scanner.nextInt();
 				        scanner.nextLine();
 						Quarto quarto = em.find(Quarto.class, numQuarto);
+						*/
 						if(quarto != null){
 							System.out.println(quarto.toString());
 						}else {
@@ -223,14 +241,19 @@ public class App {
 				switch (deletarOpcao) {
 					case 1:
 						// Lógica para deletar um quarto
+						/*
 						System.out.println("Número do quarto:");
 				        int numQuarto = scanner.nextInt();
 				        scanner.nextLine();
-						Quarto quarto = em.find(Quarto.class, numQuarto);
+				        */
+						int idQuarto = verificaNumQuarto(scanner);
+						Quarto quarto = em.find(Quarto.class, idQuarto);
+						
 						if(quarto != null){
 							em.getTransaction().begin();
 							em.remove(quarto);
 							em.getTransaction().commit();
+							System.out.println("Quarto deletado com sucesso.");
 						}else {
 							System.out.println("Quarto não encontrado.");
 						}
@@ -245,6 +268,7 @@ public class App {
 							em.getTransaction().begin();
 							em.remove(titular);
 							em.getTransaction().commit();
+							System.out.println("Titular deletado com sucesso.");
 						}else {
 							System.out.println("Titular não encontrado.");
 						}
@@ -259,6 +283,7 @@ public class App {
 							em.getTransaction().begin();
 							em.remove(hotel);
 							em.getTransaction().commit();
+							System.out.println("Hotel deletado com sucesso.");
 						}else {
 							System.out.println("Hotel não encontrado.");
 						}
@@ -317,6 +342,20 @@ public class App {
 		}
 
 		scanner.close();
+	}
+	public static int verificaNumQuarto(Scanner scanner) {
+		System.out.println("Número do prédio:");
+		String numPredio = scanner.next();
+		System.out.println("Número do andar:");
+		String numAndar = scanner.next();
+		System.out.println("Número do quarto:");
+		int numQuarto = scanner.nextInt();
+		scanner.nextLine();
+		numQuarto = Quarto.verificacaoNumQuarto(numQuarto);
+		String numQuartoStr = Integer.toString(numQuarto);
+		String aux = numPredio + numAndar + numQuarto;
+		int idQuarto = Integer.parseInt(aux);
+		return idQuarto;
 	}
 
 }
